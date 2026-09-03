@@ -5,7 +5,7 @@ Institution--> Richfield Graduate Institution of Technology
 Authot--> Jaco van niekerk
 
 ### --> Problem Solved by app
-Food always gets thrown away due to people forgetting what ingredients they aread have at home. They eitehr dont have the ingredients half way through a recipe.
+Food always gets thrown away due to people forgetting what ingredients they aread have at home. They either dont have the ingredients half way through a recipe.
 The manager works the other way arround, it checks what is currently in your pantry and shows all meals that you can compelete.
 
 
