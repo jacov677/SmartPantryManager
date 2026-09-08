@@ -14,7 +14,7 @@ public class RecipeIngredient {
 
     }
 
-    public RecipeIngredient(int id, int recipeId, String recipeName, double quantity, String unit){
+    public RecipeIngredient(int id, int recipeId, String ingredientName, double quantity, String unit){
         this.id = id;
         this.recipeId = recipeId;
         this.ingredientName = (ingredientName == null) ?"": ingredientName ;
