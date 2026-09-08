@@ -17,6 +17,9 @@ public class PantryItem {
 //        this.expiryDate = expiryDate;
     }
 
+
+    //second constructor to cvater for id
+
     public PantryItem(int id,String name, double quantity, String unit, String expiryDate){
          this.id = id;
         this.name = (name  == null) ? "" : name;
