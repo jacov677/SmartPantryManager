@@ -128,8 +128,87 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return items;
 
     }
+    public int updatePantryItem(PantryItem item){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_PANTRY_NAME, item.getName());
+        values.put(COL_PANTRY_QUANTITY, item.getQuantity());
+        values.put(COL_PANTRY_UNIT, item.getUnit());
+        values.put(COL_PANTRY_EXPIRY, item.getExpiryDate());
+
+        return db.update(TABLE_PANTRY, values,COL_PANTRY_ID + " = ?",
+                new String[]{ String.valueOf(item.getId()) });
+
+    }
+
+    public int deletePantryItem(int id){
+        SQLiteDatabase db = getWritableDatabase();
+
+        return db.delete(TABLE_PANTRY, COL_PANTRY_ID + " = ? ",
+                new String[]{  String.valueOf(id)});
+
+
+
+    }
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
