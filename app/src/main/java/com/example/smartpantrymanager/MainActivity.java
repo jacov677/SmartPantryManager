@@ -20,21 +20,30 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper dbHelper;
+    private RecyclerView recyclerPantry;
+    private TextView textEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
+    //    DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+        dbHelper = new DatabaseHelper(this);
+
         if (dbHelper.getAllPantryItems().isEmpty()) {
             dbHelper.insertPantryItem(new PantryItem("tomatoes", 3, "pieces", null));
             dbHelper.insertPantryItem(new PantryItem("garlic", 2, "cloves", null));
             dbHelper.insertPantryItem(new PantryItem("pasta", 1, "pack", null));
             dbHelper.insertPantryItem(new PantryItem("olive oil", 1, "bottle", null));
         }
-        dbHelper.getWritableDatabase();
+        //dbHelper.getWritableDatabase();
 //        //dbHelper.insertPantryItem(new PantryItem("tamatoes", 3, "pieces", null));
 //        List<PantryItem> items = dbHelper.getAllPantryItems();
 //        for (PantryItem p : items){
@@ -56,11 +65,32 @@ public class MainActivity extends AppCompatActivity {
 //        for (PantryItem p : dbHelper.getAllPantryItems()) {
 //            Log.d("Pantry", p.getId() + " | " + p.getName() + " | " + p.getQuantity() + " " + p.getUnit());
 //        }
-        RecyclerView recyclerPantry = findViewById(R.id.recyclerPantry);
-        TextView textEmpty = findViewById(R.id.textEmpty);
+        recyclerPantry = findViewById(R.id.recyclerPantry);
+        textEmpty = findViewById(R.id.textEmpty);
 
         recyclerPantry.setLayoutManager(new LinearLayoutManager(this));
 
+
+
+        FloatingActionButton fabAdd = findViewById(R. id. fabAdd);
+        fabAdd.setOnClickListener(v->{
+            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+            startActivity(intent);
+        });
+
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+
+    @Override
+    protected void  onResume(){
+        super.onResume();
         List<PantryItem> items = dbHelper.getAllPantryItems();
         recyclerPantry.setAdapter(new PantryAdapter(items));
 
@@ -71,19 +101,6 @@ public class MainActivity extends AppCompatActivity {
             recyclerPantry.setVisibility(RecyclerView.VISIBLE);
             textEmpty.setVisibility(RecyclerView.GONE);
         }
-
-        FloatingActionButton fabAdd = findViewById(R. id. fabAdd);
-        fabAdd.setOnClickListener(v->{
-            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
-            startActivity(intent);
-        });
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 //
 //    private void setLayoutManager(LinearLayoutManager linearLayoutManager) {
