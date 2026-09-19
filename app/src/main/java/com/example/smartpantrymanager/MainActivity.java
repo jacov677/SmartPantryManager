@@ -1,5 +1,6 @@
 package com.example.smartpantrymanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartpantrymanager.adapter.PantryAdapter;
 import com.example.smartpantrymanager.data.DatabaseHelper;
 import com.example.smartpantrymanager.model.PantryItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -70,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
             textEmpty.setVisibility(RecyclerView.GONE);
         }
 
+        FloatingActionButton fabAdd = findViewById(R. id. fabAdd);
+        fabAdd.setOnClickListener(v->{
+            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+            startActivity(intent);
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
