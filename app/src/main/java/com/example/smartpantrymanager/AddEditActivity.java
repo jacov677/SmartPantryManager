@@ -1,6 +1,7 @@
 package com.example.smartpantrymanager;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,6 +19,8 @@ public class AddEditActivity extends AppCompatActivity {
     private EditText editName, editQuantity, editUnit, editExpiry;
     private DatabaseHelper dbHelper;
 
+    private int itemId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +36,29 @@ public class AddEditActivity extends AppCompatActivity {
         Button buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(v -> saveItem());
 
+        Button buttonDelete = findViewById(R.id.buttonDelete);
+
+        itemId = getIntent().getIntExtra("ITEM_ID", -1);
+
+        if (itemId != -1) {
+            setTitle("Edit Ingredient");
+
+            PantryItem existing = dbHelper.getPantryItemById(itemId);
+            if (existing != null) {
+                editName.setText(existing.getName());
+                editQuantity.setText(String.valueOf(existing.getQuantity()));
+                editUnit.setText(existing.getUnit());
+                editExpiry.setText(existing.getExpiryDate());
 
 
+                buttonDelete.setVisibility(View.VISIBLE);
+                buttonDelete.setOnClickListener(v -> {
+                    dbHelper.deletePantryItem(itemId);
+                    finish();
+                });
 
-
+            }
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -45,27 +67,32 @@ public class AddEditActivity extends AppCompatActivity {
         });
     }
 
-private void saveItem(){
-    String name = editName.getText().toString().trim();
-    String quantityText = editQuantity.getText().toString().trim();
-    String unit = editUnit.getText().toString().trim();
-    String expiry = editExpiry.getText().toString().trim();
+    private void saveItem() {
+        String name = editName.getText().toString().trim();
+        String quantityText = editQuantity.getText().toString().trim();
+        String unit = editUnit.getText().toString().trim();
+        String expiry = editExpiry.getText().toString().trim();
 
-    if (name.isEmpty()) {
-        editName.setError("Name is required");
-        return;
+        if (name.isEmpty()) {
+            editName.setError("Name is required");
+            return;
+        }
+        if (quantityText.isEmpty()) {
+            editQuantity.setError("Quantity is required");
+            return;
+        }
+        if (unit.isEmpty()) {
+            editUnit.setError("Unit is required");
+            return;
+        }
+        double quantity = Double.parseDouble(quantityText);
+        if (itemId == -1){
+        dbHelper.insertPantryItem(new PantryItem(name, quantity, unit, expiry));
+
+        }else{
+            dbHelper.updatePantryItem(new PantryItem(itemId, name, quantity, unit, expiry));
+        }
+        finish();
     }
-    if (quantityText.isEmpty()) {
-        editQuantity.setError("Quantity is required");
-        return;
-    }
-    if (unit.isEmpty()) {
-        editUnit.setError("Unit is required");
-        return;
-    }
-    double quantity = Double.parseDouble(quantityText);
-    dbHelper.insertPantryItem(new PantryItem(name, quantity, unit, expiry));
-    finish();
+
 }
-
-            }

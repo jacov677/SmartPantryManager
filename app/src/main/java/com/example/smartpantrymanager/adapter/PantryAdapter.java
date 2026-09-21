@@ -1,5 +1,6 @@
 package com.example.smartpantrymanager.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartpantrymanager.AddEditActivity;
 import com.example.smartpantrymanager.R;
 import com.example.smartpantrymanager.model.PantryItem;
 
@@ -53,8 +55,14 @@ public class PantryAdapter extends
         holder.textName.setText(item.getName());
 
         holder.textQuantity.setText(item.getQuantity() + " " + item.getUnit());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddEditActivity.class);
+            intent.putExtra("ITEM_ID", item.getId());
+            v.getContext().startActivity(intent);
 
+        });
     }
+
 
     @Override
     public int getItemCount() {
