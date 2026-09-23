@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.smartpantrymanager.model.PantryItem;
+import com.example.smartpantrymanager.model.Recipe;
+import com.example.smartpantrymanager.model.RecipeIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -366,7 +368,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public PantryItem getPantryItemById(int id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_PANTRY, null,
-                COL_PANTRY_ID + " = ?", new String[]{String.valueOf(id)},
+                COL_PANTRY_ID + " = ?", new String[]{ String.valueOf(id) },
                 null, null, null
         );
         PantryItem item = null;
@@ -385,6 +387,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return item;
     }
+    public List<Recipe> getAllRecipes(){
+        List<Recipe> recipes = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_RECIPES, null, null, null, null, null, COL_RECIPE_NAME);
+
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_RECIPE_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COL_RECIPE_NAME));
+            String steps = cursor.getString(cursor.getColumnIndexOrThrow(COL_RECIPE_STEPS));
+                recipes.add(new Recipe(id, name, steps));
+        }
+        cursor.close();
+        return recipes;
+    }
+    public List<RecipeIngredient> getIngredientsForRecipe(int recipeId){
+        List<RecipeIngredient> ingredients = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_RECIPE_INGREDIENTS, null, COL_INGREDIENT_RECIPE_ID + " = ?", new String[]{
+                String.valueOf(recipeId)},null, null, null);
+
+
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_INGREDIENT_ID));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(COL_INGREDIENT_NAME));
+            double quantity = cursor.getDouble(cursor.getColumnIndexOrThrow(COL_INGREDIENT_QUANTITY));
+            String unit = cursor.getString(cursor.getColumnIndexOrThrow(COL_INGREDIENT_UNIT));
+                ingredients.add(new RecipeIngredient(id, recipeId, name , quantity, unit));
+
+        }
+        cursor.close();
+        return ingredients;
+    }
+
 
 }
 
