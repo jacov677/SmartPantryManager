@@ -11,6 +11,12 @@
         <item name="colorSecondaryContainer">@color/steel_grey_light</item>
         <item name="colorOnSecondaryContainer">@color/steel_blue_dark</item>
 
+        <item name="android:colorBackground">@color/pantry_background</item>
+        <item name="colorSurface">@color/pantry_card</item>
+        <item name="colorSurfaceVariant">@color/pantry_background</item>
+        <item name="colorOutline">@color/pantry_outline</item>
+        <item name="android:windowBackground">@color/pantry_background</item>
+
         <item name="android:statusBarColor">@color/steel_blue</item>
     </style>
 

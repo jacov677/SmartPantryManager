@@ -1,11 +1,13 @@
 package com.example.smartpantrymanager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -42,6 +44,19 @@ public class SettingsActivity extends AppCompatActivity {
             showStatus();
         });
         showStatus();
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        bottomNav.setSelectedItemId(R.id.nav_settings);
+        bottomNav.setOnItemSelectedListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.nav_pantry) {
+                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                finish();
+            }
+            if (menuItem.getItemId() == R.id.nav_suggested) {
+                startActivity(new Intent(SettingsActivity.this, SuggestedRecipesActivity.class));
+                finish();
+            }
+            return true;
+        });
     }
 
     private void showStatus(){
