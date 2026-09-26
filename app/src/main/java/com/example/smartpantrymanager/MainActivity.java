@@ -39,10 +39,12 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         if (dbHelper.getAllPantryItems().isEmpty()) {
-            dbHelper.insertPantryItem(new PantryItem("tomatoes", 3, "pieces", null));
-            dbHelper.insertPantryItem(new PantryItem("garlic", 2, "cloves", null));
-            dbHelper.insertPantryItem(new PantryItem("pasta", 1, "pack", null));
-            dbHelper.insertPantryItem(new PantryItem("olive oil", 1, "bottle", null));
+            dbHelper.insertPantryItem(new PantryItem("wrap", 2, "pieces", null));
+            dbHelper.insertPantryItem(new PantryItem("egg", 6, "pieces", null));
+            dbHelper.insertPantryItem(new PantryItem("cheese", 200, "g", null));
+            dbHelper.insertPantryItem(new PantryItem("mayonnaise", 500, "ml", null));
+            dbHelper.insertPantryItem(new PantryItem("chicken", 2, "pieces", null));
+            dbHelper.insertPantryItem(new PantryItem("avo", 2, "pieces", null));
         }
         //dbHelper.getWritableDatabase();
 //        //dbHelper.insertPantryItem(new PantryItem("tamatoes", 3, "pieces", null));

@@ -148,6 +148,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void seedRecipes(SQLiteDatabase db) {
 
+        addRecipe(db, "Chicken and Avo Wrap",
+                "Boil the eggs and slice them. Layer the chicken, sliced egg, cheese and avo onto the wrap. Spread with mayonnaise, roll up and cut in half.",
+                new String[][]{
+                        {"wrap", "1", "piece"},
+                        {"egg", "2", "pieces"},
+                        {"cheese", "50", "g"},
+                        {"mayonnaise", "2", "tbsp"},
+                        {"chicken", "1", "piece"},
+                        {"avo", "1", "piece"}
+                });
+
+        addRecipe(db, "Steak with Onion Gravy",
+                "Fry the steak to your liking and set it aside to rest. Fry the sliced onion in the butter until soft. Stir in the cake flour, then the gravy powder and a little water, and simmer until thick. Pour over the steak.",
+                new String[][]{
+                        {"steak", "1", "piece"},
+                        {"onion", "1", "piece"},
+                        {"butter", "1", "tbsp"},
+                        {"cake flour", "1", "tbsp"},
+                        {"gravy powder", "2", "tbsp"}
+                });
+
         addRecipe(db, "Tomato Pasta",
                 "Boil the pasta until soft. Fry the chopped garlic in olive oil. Add chopped tomato and simmer for ten minutes. Stir through the drained pasta.",
                 new String[][]{
@@ -245,7 +266,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         addRecipe(db, "Chicken Stir Fry",
                 "Slice the chicken, onion and carrot. Fry the chicken in olive oil until cooked through, then add the vegetables for four minutes.",
                 new String[][]{
-                        {"chicken breast", "2", "pieces"},
+                        {"chicken", "2", "pieces"},
                         {"onion", "1", "piece"},
                         {"carrot", "1", "piece"},
                         {"olive oil", "2", "tbsp"}
@@ -321,6 +342,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         {"olive oil", "2", "tbsp"}
                 });
     }
+
+
 
     public List<PantryItem> getAllPantryItems() {
         List<PantryItem> items = new ArrayList<>();
