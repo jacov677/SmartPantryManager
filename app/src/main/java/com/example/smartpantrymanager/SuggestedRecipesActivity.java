@@ -41,6 +41,9 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
                 startActivity(new Intent(SuggestedRecipesActivity.this, MainActivity.class));
                 finish();
             }
+            if (menuItem.getItemId() == R.id.nav_settings){
+                startActivity(new Intent(SuggestedRecipesActivity.this, SettingsActivity.class));
+            }
             return true;
         });
     }

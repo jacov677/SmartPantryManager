@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="steel_blue">#FF1F4E79</color>
+    <color name="steel_blue_dark">#FF12324D</color>
+    <color name="steel_blue_light">#FFCFE2F3</color>
+    <color name="steel_grey">#FF5A6672</color>
+    <color name="steel_grey_light">#FFDDE3E9</color>
+    <color name="steel_surface">#FFF6F8FA</color>
 </resources>

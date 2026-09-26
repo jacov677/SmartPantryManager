@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,SuggestedRecipesActivity.class));
 
             }
+            if (menuItem.getItemId() == R.id.nav_settings){
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            }
+
             return true;
         });
     }

@@ -10,5 +10,9 @@
         android:id="@+id/nav_suggested"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Suggested" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Settings" />
 
 </menu>
